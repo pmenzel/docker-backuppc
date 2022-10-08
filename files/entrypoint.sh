@@ -66,7 +66,11 @@ if [ -f /firstrun ]; then
 		--html-dir-url /BackupPC \
 		--install-dir /usr/local/BackupPC \
 		--backuppc-user "$BACKUPPC_USERNAME" \
+		--no-set-perms \
 		$configure_admin
+
+	chown -R "$BACKUPPC_USERNAME":"$BACKUPPC_GROUPNAME" /etc/backuppc /home/backuppc /usr/local/BackupPC /var/www/html/BackupPC /var/www/cgi-bin/BackupPC /var/run/BackupPC
+	chmod a+x /usr/local/BackupPC/bin/*
 
 	# Prepare lighttpd
 	if [ "$USE_SSL" = true ]; then
